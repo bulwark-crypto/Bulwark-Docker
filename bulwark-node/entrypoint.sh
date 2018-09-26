@@ -5,4 +5,4 @@ if ! grep rpcpassword /home/bulwark/.bulwark/bulwark.conf; then
   echo "rpcuser=${RPCUSER}" > /home/bulwark/.bulwark/bulwark.conf
   echo "rpcpassword=${RPCPASSWORD}" >> /home/bulwark/.bulwark/bulwark.conf
 fi
-/bin/bulwarkd -datadir=/home/bulwark/data -conf=/home/bulwark/.bulwark/bulwark.conf
+/bin/bulwarkd
