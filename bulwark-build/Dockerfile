@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 AS build
+FROM ubuntu:16.04
 LABEL maintainer="kewagi"
 LABEL version="1.3.1.0"
 LABEL name="Bulwark"
@@ -30,11 +30,7 @@ WORKDIR /Bulwark
 RUN ./autogen.sh \
   && ./configure --disable-tests --with-gui=no \
   && make \
-  && mv ./src/bulwarkd ./src/bulwark-cli /usr/local/bin
+  && strip ./src/bulwark* \
+  && mv ./src/bulwarkd ./src/bulwark-cli //bin
 
-FROM scratch
-USER bulwark
-COPY --from=build /Bulwark/src/bulwarkd /bin/
-ENTRYPOINT ["/bin/bulwarkd"]
-CMD ["-rpcuser=bulwark","-rpcpassword=sdfdf3245hkj","-rpcallowip=0.0.0.0/0"]
-EXPOSE 52543/tcp
+ENTRYPOINT ["/bin/sh"]
