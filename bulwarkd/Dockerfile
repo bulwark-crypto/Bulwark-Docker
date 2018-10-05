@@ -3,6 +3,8 @@ LABEL maintainer="kewagi"
 LABEL version="2.0.0.0"
 LABEL name="Bulwark"
 
+ENV BULWARK_VERSION 2.0.0.0
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
   && apt-get -y install --no-install-recommends \ 
@@ -32,5 +34,10 @@ RUN ./autogen.sh \
   && make \
   && strip ./src/bulwarkd ./src/bulwark-cli \
   && mv ./src/bulwarkd ./src/bulwark-cli /bin
-
-ENTRYPOINT ["/bin/dash"]
+#RUN adduser bulwark --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
+#  && chown -R bulwark:bulwark /home/bulwark
+EXPOSE 52543
+COPY entrypoint.sh /bin/
+#USER bulwark
+VOLUME [ "/root/.bulwark" ]
+ENTRYPOINT ["/bin/entrypoint.sh"]
