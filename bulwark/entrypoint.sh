@@ -1,7 +1,12 @@
 #!/bin/dash
-echo "HELLO DEBUG"
-mkdir ~/.bulwark
-touch ~/.bulwark/bulwark.conf
+
+if [ ! -f ~/.bulwark/bulwark.conf ]; then
+  touch ~/.bulwark/bulwark.conf
+fi
+
+for ARG in "$@"; do
+  echo $ARG
+done
 
 if ! grep rpcpassword ~/.bulwark/bulwark.conf; then
   RPCUSER="bulwarkrpc"
@@ -9,5 +14,7 @@ if ! grep rpcpassword ~/.bulwark/bulwark.conf; then
   touch ~/.bulwark/bulwark.conf
   echo "rpcuser=${RPCUSER}" >> ~/.bulwark/bulwark.conf
   echo "rpcpassword=${RPCPASSWORD}" >> ~/.bulwark/bulwark.conf
+  echo "printtoconsole=1" >> ~/.bulwark/bulwark.conf
 fi
-/bin/bulwarkd -printtoconsole
+
+exec /bin/bulwarkd

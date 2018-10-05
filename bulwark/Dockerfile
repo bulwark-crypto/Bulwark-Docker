@@ -34,10 +34,11 @@ RUN ./autogen.sh \
   && make \
   && strip ./src/bulwarkd ./src/bulwark-cli \
   && mv ./src/bulwarkd ./src/bulwark-cli /bin
-#RUN adduser bulwark --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
-#  && chown -R bulwark:bulwark /home/bulwark
+RUN adduser bulwark --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null
 EXPOSE 52543
 COPY entrypoint.sh /bin/
-#USER bulwark
-VOLUME [ "/root/.bulwark" ]
+USER bulwark
+RUN mkdir /home/bulwark/.bulwark && chown -R bulwark:bulwark /home/bulwark/.bulwark
+WORKDIR /home/bulwark
+VOLUME [ "/home/bulwark/.bulwark" ]
 ENTRYPOINT ["/bin/entrypoint.sh"]
