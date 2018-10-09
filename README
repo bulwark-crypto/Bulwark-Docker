@@ -1,5 +1,19 @@
 # Bulwark-Docker
 
-* bulwark: Bulwark node
-* i2p: I2P server
-* tor: TOR server
+A collection of Dockerfiles related to the [Bulwark](https://www.bulwarkcrypto.com) project.
+
+## bulwark-build
+
+Creates Linux 64 Bulwark binaries from scratch.
+
+## bulwark-node 
+
+Creates a working bulwark Linux64 node by installing bulwarkd/bulwark-cli and setting up a user bulwark with the needed configuration. Any parameters you add to the `run command will be added as configuration lines to bulwark.conf
+
+## kovri
+
+Sets up Kovri and configures a Bulwark service.
+
+## tor 
+
+Sets up a TOR server and configures it for Bulwark.
