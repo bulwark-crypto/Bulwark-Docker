@@ -6,7 +6,6 @@ ADD https://github.com/kewagi/kovri/releases/download/v0.1.0-alpha/kovri-0.1.0-a
 ADD https://github.com/kewagi/kovri/releases/download/v0.1.0-alpha/kovri-conf.tar.gz kovri-conf.tar.gz
 RUN apt-get update \
   && apt-get -qq --no-install-recommends install \
-  curl \
   doxygen=1.8.11-1 \
   graphviz=2.38.0-12ubuntu2.1 \
   libboost-all-dev=1.58.0.1ubuntu1 \
