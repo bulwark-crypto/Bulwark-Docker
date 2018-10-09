@@ -2,6 +2,7 @@ FROM ubuntu:16.04
 LABEL maintainer="kewagi"
 LABEL version="0.1.0"
 LABEL name="Kovri I2P"
+ENV KOVRI_PORT=23456
 ADD https://github.com/kewagi/kovri/releases/download/v0.1.0-alpha/kovri-0.1.0-alpha.tar.gz kovri.tar.gz
 ADD https://github.com/kewagi/kovri/releases/download/v0.1.0-alpha/kovri-conf.tar.gz kovri-conf.tar.gz
 RUN apt-get update \
@@ -18,15 +19,15 @@ RUN adduser kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled
   && tar xzf kovri-conf.tar.gz -C /home/kovri/.kovri/ \
   && echo "[Bulwark]" > /home/kovri/.kovri/config/tunnels.conf \
   && echo "type = server" >> /home/kovri/.kovri/config/tunnels.conf \
-  && echo "address = bulwark-i2p" >> /home/kovri/.kovri/config/tunnels.conf \
-  && echo "port = 54525" >> /home/kovri/.kovri/config/tunnels.conf \
+  && echo "address = bulwark" >> /home/kovri/.kovri/config/tunnels.conf \
+  && echo "port = 52543" >> /home/kovri/.kovri/config/tunnels.conf \
   && echo "in_port = 52543" >> /home/kovri/.kovri/config/tunnels.conf \
   && echo "keys = bulwarkd.dat" >> /home/kovri/.kovri/config/tunnels.conf \
   && chown -R kovri:kovri /home/kovri
 VOLUME /home/kovri/.kovri
 USER kovri
-ENTRYPOINT ["/bin/kovri"] 
-EXPOSE 9111-30777
+ENTRYPOINT [ "sh", "-c", "/bin/kovri --host 0.0.0.0 --socksproxyaddress 0.0.0.0 --port ${KOVRI_PORT}" ]
+EXPOSE 4447
 
 
 
