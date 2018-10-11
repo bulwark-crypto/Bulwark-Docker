@@ -4,16 +4,21 @@ LABEL version="2.0.0.0"
 LABEL name="Bulwark"
 
 ENV BULWARK_VERSION 2.0.0.0
+SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ADD https://github.com/bulwark-crypto/Bulwark/releases/download/2.0.0/bulwark-node-2.0.0.0-linux64.tar.gz /
-RUN tar xzf bulwark-node-2.0.0.0-linux64.tar.gz -C /bin/ \
+COPY entrypoint.sh /usr/local/bin/
+
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y nano=2.5.3-2ubuntu2 \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
+  && tar xzf bulwark-node-2.0.0.0-linux64.tar.gz -C /usr/local/bin/ \
   && rm bulwark-node-2.0.0.0-linux64.tar.gz \
-  && adduser bulwark --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null
-EXPOSE 52543
-COPY entrypoint.sh /bin/
+  && adduser bulwark --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
+  && mkdir /home/bulwark/.bulwark && chown -R bulwark:bulwark /home/bulwark/.bulwark
+
 USER bulwark
-RUN mkdir /home/bulwark/.bulwark && chown -R bulwark:bulwark /home/bulwark/.bulwark
-WORKDIR /home/bulwark
 VOLUME [ "/home/bulwark/.bulwark" ]
-ENTRYPOINT ["/bin/entrypoint.sh"]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+EXPOSE 52543
