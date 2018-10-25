@@ -32,7 +32,7 @@ cat >> docker-compose.yml << EOL
     command:
       [
         "-masternode=1",
-        "-masternodeaddr=${IPS[$i]}:52543",
+        "-masternodeaddr=[${IPS[$i]}]:52543",
         "-masternodeprivkey=${KEYS[$i]}",
         "-listen=1",
         "-server=1",
