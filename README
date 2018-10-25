@@ -2,13 +2,17 @@
 
 A collection of Dockerfiles related to the [Bulwark](https://www.bulwarkcrypto.com) project.
 
-## bulwark-build
+## bulwark-dev
 
-Creates Linux 64 Bulwark binaries from scratch.
+Creates the latest Bulwark test build
 
 ## bulwark-node 
 
-Creates a working bulwark Linux64 node by installing bulwarkd/bulwark-cli and setting up a user bulwark with the needed configuration. Any parameters you add to the `run command will be added as configuration lines to bulwark.conf
+Creates a working bulwark Linux64 node by installing bulwarkd/bulwark-cli and setting up a user bulwark with the needed configuration. 
+Any parameters you add to the `run` command will be sent to bulwarkd as parameters.
+
+## compose gen
+docker-compose generator for masternodes.
 
 ## kovri
 
