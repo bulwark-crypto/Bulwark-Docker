@@ -23,6 +23,8 @@ done
 
 echo "Writing docker-compose.yml file..."
 
+mkdir ./bulwark-mn && cd ./bulwark-mn || exit 1
+
 echo 'version: "3.7"' > docker-compose.yml
 echo 'services:' >> docker-compose.yml
 
