@@ -18,7 +18,7 @@ Every Docker container requires its own unique IP address to work. This can be e
 
 ### Docker
 
-To install Docker on Ubuntu 14/16/18, follow these [instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/)):
+To install Docker on Ubuntu 14/16/18, follow these [instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/):
 
 #### Uninstall old versions and update your repositories
 
