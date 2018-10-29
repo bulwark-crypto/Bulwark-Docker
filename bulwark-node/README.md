@@ -120,15 +120,48 @@ bulwarkd will restart and use the settings from bulwark.conf, which will persist
 
 ### Using docker-compose (Easiest option)
 
-The easiest way to run one or more masternodes via Docker is with the use of a [docker-compose](https://docs.docker.com/compose/) file. To use it, you need to [install docker-compose](https://docs.docker.com/compose/install/), and then create a compose file. The easiest way to do that is with our [compose-gen] tool - just enter the name, IP and key for each of the masternodes you want to run on the machine, and a file will be generated for you. Then, all you need to do is run
+The easiest way to run one or more masternodes via Docker is with the use of a [docker-compose](https://docs.docker.com/compose/) file. To use it, you need to [install docker-compose](https://docs.docker.com/compose/install/), and then create a compose file. The easiest way to do that is with our [compose-gen](https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/src/branch/master/compose-gen) tool.
+
+After you've created your file, install docker-compose by running the following commands:
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+Then, all you need to do is run
 
 ```bash
 docker-compose up -d
 ```
 
-to start all masternodes listed in the docker-compose.yml file.
+inside the directory containing your docker-compose.yml file to start all masternodes listed.
 
-If for whatever reason you want to create the file manually, here's an example:
+## Updating a node
+
+### Non-compose node
+
+To update a non-compose node to the newest version of Bulwark, run these commands:
+
+```bash
+docker container stop NAME
+docker image pull bulwarkcrypto/bulwark:latest
+docker container run bulwarkcrypto/bulwark:latest
+```
+
+Please note that unless you manually added your configuration to bulwark.conf, you will need to start your node with the parameters you used before. Also, make sure to assign the same volume to the container with the `-v` parameter to keep your chaindata.
+
+### docker-compose
+
+Since the docker-compose file keeps all your configuration, simply run these three commands to update:
+
+```bash
+docker-compose down
+docker-compose pull
+docker-compose up
+```
+
+## docker-compose.yml example
 
 ```yaml
 version: "3.7"
@@ -160,28 +193,4 @@ networks:
   ? NAME
 volumes:
   ? NAME
-```
-
-## Updating a node
-
-### Non-compose node
-
-To update a non-compose node to the newest version of Bulwark, run these commands:
-
-```bash
-docker container stop NAME
-docker image pull bulwarkcrypto/bulwark:latest
-docker container run bulwarkcrypto/bulwark:latest
-```
-
-Please note that unless you manually added your configuration to bulwark.conf, you will need to start your node with the parameters you used before. Also, make sure to assign the same volume to the container with the `-v` parameter to keep your chaindata.
-
-### docker-compose
-
-Since the docker-compose file keeps all your configuration, simply run these three commands to update:
-
-```bash
-docker-compose down
-docker-compose pull
-docker-compose up
 ```
