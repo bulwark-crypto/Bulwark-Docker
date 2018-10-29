@@ -70,7 +70,7 @@ sudo apt-get update
 sudo apt-get install docker-ce
 ```
 
-#### Installing Docker on different host systems.
+#### Installing Docker on different host systems
 
 See [here](https://docs.docker.com/install/) for info on how to install Docker on other systems. Please note that due to technical limitations, Docker will not run on most OpenVZ VPS - you need a dedicated server or a KVM VPS.
 
