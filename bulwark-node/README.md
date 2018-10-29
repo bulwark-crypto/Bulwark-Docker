@@ -80,6 +80,12 @@ See [here](https://docs.docker.com/install/) for info on how to install Docker o
 
 The easiest way to run one or more masternodes via Docker is with the use of a [docker-compose](https://docs.docker.com/compose/) file. To use it, you need to [install docker-compose](https://docs.docker.com/compose/install/), and then create a compose file. The easiest way to do that is with our [compose-gen](https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/src/branch/master/compose-gen) tool.
 
+To create said file, run the following command:
+
+```bash
+bash <(wget -qO- https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/raw/branch/master/compose-gen/compose-gen.sh)
+```
+
 After you've created your file, install docker-compose by running the following commands:
 
 ```bash
@@ -93,7 +99,7 @@ Then, all you need to do is run
 docker-compose up -d
 ```
 
-inside the directory containing your docker-compose.yml file to start all masternodes listed.
+inside the directory containing your docker-compose.yml file (called `bulwark-mn` by default) to start all masternodes listed.
 
 ### Using bulwark.conf (For a single node)
 

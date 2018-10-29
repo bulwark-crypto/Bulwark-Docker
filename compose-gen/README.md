@@ -6,9 +6,9 @@ A shell script that allows you to create a docker-compose file for any number of
 
 To run the script, paste the following line into a terminal and press Enter:
 
-````bash
-bash <(wget -qO- https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/raw/branch/master/compose-gen/compose-gen.sh)```
-````
+```bash
+bash <(wget -qO- https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/raw/branch/master/compose-gen/compose-gen.sh)
+```
 
 The script will ask you for three pieces of information:
 
@@ -79,4 +79,4 @@ docker-compose down -v
 docker-compose up
 ```
 
-this will resync your node(s) and fix any corruption issues.
+This will resync your node(s) and fix any corruption issues.
