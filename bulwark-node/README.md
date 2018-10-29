@@ -74,49 +74,7 @@ sudo apt-get install docker-ce
 
 See [here](https://docs.docker.com/install/) for info on how to install Docker on other systems. Please note that due to technical limitations, Docker will not run on most OpenVZ VPS - you need a dedicated server or a KVM VPS.
 
-## Starting the image
-
-The Docker image you want to use is _bulwarkcrypto/bulwark:latest_.  
-To start a node, run the following command:
-
-```bash
-docker container run bulwarkcrypto/bulwark:latest
-```
-
-Depending on your needs, you will need to add certain [parameters](https://docs.docker.com/engine/reference/commandline/container_run/#options) to docker, like `-d` to run in the background and `-v` to set a persistent volume for the chaindata. Anything you write after _bulwarkcrypto/bulwark:latest_ will be passed to bulwarkd as a [parameter](https://kb.bulwarkcrypto.com/Information/Running-Bulwark/#command-line-arguments).
-
 ## Three ways to run a Docker masternode
-
-### Via command line (not recommended)
-
-```bash
-docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:52543 -masternodeprivkey=KEY -listen=1 -server=1
-```
-
-Replace _NAME_, _ADDRESS_ and _KEY_ with your own values.
-
-- **NAME:** Any name you want to use for the node. Must contain only alphanumeric characters.
-- **ADDRESS:** The external IP address your masternode should use. Usually the main IP of the VPS.
-- **KEY:** The masternode key. You can generate one in the debug console of your wallet with the command `masternode genkey`.
-
-This line will create a container with a persistent storage volume for the chaindata, but it will **not** save parameters like the IP and key, so every time you shut it down and start it back up, you need to pass your parameters again.
-
-### Using bulwark.conf (For a single node)
-
-The Bulwark image comes with the nano text editor pre-installed, so if you want, you can start the node with a command like
-
-```bash
-docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest
-```
-
-and then edit your bulwark.conf by running
-
-```bash
-docker container exec -it NAME nano /home/bulwark/.bulwark/bulwark.conf
-```
-
-Then, restart your container with `docker container restart NAME`  
-bulwarkd will restart and use the settings from bulwark.conf, which will persist unless you delete the volume.
 
 ### Using docker-compose (Easiest option)
 
@@ -136,6 +94,37 @@ docker-compose up -d
 ```
 
 inside the directory containing your docker-compose.yml file to start all masternodes listed.
+
+### Using bulwark.conf (For a single node)
+
+The Bulwark image comes with the nano text editor pre-installed, so if you want, you can start the node with a command like
+
+```bash
+docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest
+```
+
+and then edit your bulwark.conf by running
+
+```bash
+docker container exec -it NAME nano /home/bulwark/.bulwark/bulwark.conf
+```
+
+Then, restart your container with `docker container restart NAME`  
+bulwarkd will restart and use the settings from bulwark.conf, which will persist unless you delete the volume.
+
+### Via command line (not recommended)
+
+```bash
+docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:52543 -masternodeprivkey=KEY -listen=1 -server=1
+```
+
+Replace _NAME_, _ADDRESS_ and _KEY_ with your own values.
+
+- **NAME:** Any name you want to use for the node. Must contain only alphanumeric characters.
+- **ADDRESS:** The external IP address your masternode should use. Usually the main IP of the VPS.
+- **KEY:** The masternode key. You can generate one in the debug console of your wallet with the command `masternode genkey`.
+
+This line will create a container with a persistent storage volume for the chaindata, but it will **not** save parameters like the IP and key, so every time you shut it down and start it back up, you need to pass your parameters again.
 
 ## Updating a node
 
@@ -160,6 +149,16 @@ docker-compose down
 docker-compose pull
 docker-compose up
 ```
+
+## Technical information
+
+### Image
+
+The Docker image you want to use is _bulwarkcrypto/bulwark:latest_.
+
+### Entrypoint
+
+The entrypoint script passes anything you add to the `docker run` statement as a [parameter](https://kb.bulwarkcrypto.com/Information/Running-Bulwark/#command-line-arguments) to bulwarkd.
 
 ## docker-compose.yml example
 
@@ -194,3 +193,5 @@ networks:
 volumes:
   ? NAME
 ```
+
+I
