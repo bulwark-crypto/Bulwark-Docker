@@ -18,7 +18,61 @@ Every Docker container requires its own unique IP address to work. This can be e
 
 ### Docker
 
-To install Docker on Ubuntu, follow [this guide](https://docs.docker.com/install/linux/docker-ce/ubuntu/). See [here](https://docs.docker.com/install/) for info on how to install Docker on other systems. Please note that due to technical limitations, Docker will not run on most OpenVZ VPS - you need a dedicated server or a KVM VPS.
+To install Docker on Ubuntu 14/16/18, follow these [instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/)):
+
+#### Uninstall old versions and update your repositories
+
+```bash
+sudo apt-get remove docker docker-engine docker.io
+sudo apt-get update
+```
+
+#### **Ubuntu 14.04 only:** Install additional storage drivers
+
+```bash
+sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
+```
+
+#### Set up dependencies
+
+```bash
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+```
+
+#### Add and verify the Docker GPG key
+
+```bash
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ sudo apt-key fingerprint 0EBFCD88
+```
+
+The output from this command should look like this:
+
+```text
+pub   4096R/0EBFCD88 2017-02-22
+      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) <docker@docker.com>
+sub   4096R/F273FCD8 2017-02-22
+```
+
+#### Add Docker repository
+
+```bash
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+```
+
+This assumes you want to install the packages for an x86_64 or AMD64 architecture. For other architectures, check the [official guide](https://docs.docker.com/install/linux/docker-ce/ubuntu/#set-up-the-repository).
+
+#### Install Docker
+
+```bash
+sudo apt-get update
+sudo apt-get install docker-ce
+```
+
+#### Installing Docker on different host systems.
+
+See [here](https://docs.docker.com/install/) for info on how to install Docker on other systems. Please note that due to technical limitations, Docker will not run on most OpenVZ VPS - you need a dedicated server or a KVM VPS.
 
 ## Starting the image
 
@@ -39,7 +93,13 @@ Depending on your needs, you will need to add certain [parameters](https://docs.
 docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:52543 -masternodeprivkey=KEY -listen=1 -server=1
 ```
 
-Replace _NAME_, _ADDRESS_ and _KEY_ with your own values. This line will create a container with a persistent storage volume for the chaindata, but it will **not** save parameters like the IP and key, so every time you shut it down and start it back up, you need to pass your parameters again.
+Replace _NAME_, _ADDRESS_ and _KEY_ with your own values.
+
+- **NAME:** Any name you want to use for the node. Must contain only alphanumeric characters.
+- **ADDRESS:** The external IP address your masternode should use. Usually the main IP of the VPS.
+- **KEY:** The masternode key. You can generate one in the debug console of your wallet with the command `masternode genkey`.
+
+This line will create a container with a persistent storage volume for the chaindata, but it will **not** save parameters like the IP and key, so every time you shut it down and start it back up, you need to pass your parameters again.
 
 ### Using bulwark.conf (For a single node)
 
