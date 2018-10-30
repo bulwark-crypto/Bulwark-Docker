@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL maintainer="kewagi"
+LABEL maintainer="kewagi <kewagi@bulwarkcrypto.com>"
 LABEL version="2.0.0.0"
 LABEL name="Bulwark"
 
