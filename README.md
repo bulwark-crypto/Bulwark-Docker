@@ -4,11 +4,7 @@ A collection of Dockerfiles and tools related to the [Bulwark](https://www.bulwa
 
 ## bulwark-node
 
-Creates a working bulwark Linux64 node by installing bulwarkd/bulwark-cli and setting up a user bulwark with the needed configuration. Any parameters you add to the `run` command will be sent to bulwarkd as parameters.
-
-## compose gen
-
-docker-compose generator for masternodes.
+Creates a working bulwark Linux64 node by installing bulwarkd/bulwark-cli and setting up a user bulwark with the needed configuration. Any parameters you add to the `run` command will be sent to bulwarkd as parameters. Also contains scripts for creating a compose file and setting up the entire Docker environment on an Ubuntu server.
 
 ## kovri
 
