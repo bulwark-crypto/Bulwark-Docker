@@ -116,4 +116,13 @@ for i in "${!NAMES[@]}"; do
 echo "  ? ${NAMES[$i]}" >> docker-compose.yml
 done 
 
-echo "Complete. You can now start your node(s) with: docker-compose up"
+clear
+
+cat << EOL
+
+Setup complete. You can now start your node(s) with: 
+
+cd bulark-mn
+docker-compose up
+
+EOL
