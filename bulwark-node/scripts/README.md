@@ -80,3 +80,11 @@ docker-compose up
 ```
 
 This will resync your node(s) and fix any corruption issues.
+
+# ubuntu-docker-mn.sh
+
+To install docker and docker-compose and create a compose file on your X86 VPS running Ubuntu 16.04 or higher, run this command:
+
+```bash
+wget -qO- http://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/ubuntu-docker-mn/install.sh | bash
+```
