@@ -67,4 +67,4 @@ for i in "${!NAMES[@]}"; do
 echo "  ? ${NAMES[$i]}" >> docker-compose.yml
 done 
 
-Echo "Complete. You can now start your node(s) with: docker-compose up"
+echo "Complete. You can now start your node(s) with: docker-compose up"
