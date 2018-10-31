@@ -78,7 +78,7 @@ See [here](https://docs.docker.com/install/) for info on how to install Docker o
 
 ### Using docker-compose (Easiest option)
 
-The easiest way to run one or more masternodes via Docker is with the use of a [docker-compose](https://docs.docker.com/compose/) file. To use it, you need to [install docker-compose](https://docs.docker.com/compose/install/), and then create a compose file. The easiest way to do that is with our [compose-gen](https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/src/branch/master/compose-gen) tool.
+The easiest way to run one or more masternodes via Docker is with the use of a [docker-compose](https://docs.docker.com/compose/) file. To use it, you need to [install docker-compose](https://docs.docker.com/compose/install/), and then create a compose file. The easiest way to do that is with our compose-gen script for Linux.
 
 To create said file, run the following command:
 
@@ -200,7 +200,7 @@ volumes:
   ? NAME
 ```
 
-# Scripts
+# Additional scripts
 
 ## compose-gen
 
