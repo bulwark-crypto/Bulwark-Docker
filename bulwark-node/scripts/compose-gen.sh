@@ -73,7 +73,7 @@ cat << EOL
 
 Setup complete. You can now start your node(s) with: 
 
-cd bulark-mn
+cd bulwark-mn
 docker-compose up
 
 EOL
