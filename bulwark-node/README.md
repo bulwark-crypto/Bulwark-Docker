@@ -83,7 +83,7 @@ The easiest way to run one or more masternodes via Docker is with the use of a [
 To create said file, run the following command:
 
 ```bash
-bash <(wget -qO- https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/raw/branch/master/compose-gen/compose-gen.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/kewagi/Bulwark-Docker/master/bulwark-node/scripts/compose-gen.sh)
 ```
 
 After you've created your file, install docker-compose by running the following commands:
@@ -211,7 +211,7 @@ A shell script that allows you to create a docker-compose file for any number of
 To run the script, paste the following line into a terminal and press Enter:
 
 ```bash
-bash <(wget -qO- https://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/raw/branch/master/compose-gen/compose-gen.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/kewagi/Bulwark-Docker/master/bulwark-node/scripts/compose-gen.sh)
 ```
 
 The script will ask you for three pieces of information:
@@ -290,5 +290,5 @@ This will resync your node(s) and fix any corruption issues.
 To install docker and docker-compose and create a compose file on your X86 VPS running Ubuntu 16.04 or higher, run this command:
 
 ```bash
-wget -qO- http://git.bulwarkcrypto.com/kewagi/Bulwark-Docker/ubuntu-docker-mn/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/kewagi/Bulwark-Docker/master/bulwark-node/scripts/ubuntu-docker-mn.sh | bash
 ```
