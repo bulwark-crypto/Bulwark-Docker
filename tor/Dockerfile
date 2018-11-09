@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL maintainer="kewagi"
+LABEL maintainer="kewagi <kewagi@bulwarkcrypto.com>"
 LABEL version="0.2.9.14"
 LABEL name="Tor Daemon"
 RUN apt-get update \

@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL maintainer="kewagi"
+LABEL maintainer="kewagi <kewagi@bulwarkcrypto.com>"
 LABEL version="0.1.0"
 LABEL name="Kovri I2P"
 ENV KOVRI_PORT=23456

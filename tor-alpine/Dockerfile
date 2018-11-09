@@ -1,5 +1,5 @@
 FROM alpine:3.8
-LABEL maintainer="kewagi"
+LABEL maintainer="kewagi <kewagi@bulwarkcrypto.com>"
 LABEL version="0.3.3.7-r0"
 LABEL name="Tor Daemon"
 # REMOVED: && echo "ControlPort 9051" >> /etc/tor/torrc \
