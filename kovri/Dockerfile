@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 LABEL maintainer="kewagi <kewagi@bulwarkcrypto.com>"
 LABEL version="0.1.0"
 LABEL name="Kovri I2P"
-ENV KOVRI_PORT=23456
 ADD https://github.com/kewagi/kovri/releases/download/v0.1.0-alpha/kovri-0.1.0-alpha.tar.gz kovri.tar.gz
 ADD https://github.com/kewagi/kovri/releases/download/v0.1.0-alpha/kovri-conf.tar.gz kovri-conf.tar.gz
 RUN apt-get update \
@@ -15,7 +14,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 RUN adduser kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
   && mkdir /home/kovri/.kovri \
-  && tar xzf kovri.tar.gz --strip=1 -C /bin \
+  && tar xzf kovri.tar.gz --strip=1 -C /usr/local/bin/ \
   && tar xzf kovri-conf.tar.gz -C /home/kovri/.kovri/ \
   && echo "[Bulwark]" > /home/kovri/.kovri/config/tunnels.conf \
   && echo "type = server" >> /home/kovri/.kovri/config/tunnels.conf \
@@ -24,9 +23,10 @@ RUN adduser kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled
   && echo "in_port = 52543" >> /home/kovri/.kovri/config/tunnels.conf \
   && echo "keys = bulwarkd.dat" >> /home/kovri/.kovri/config/tunnels.conf \
   && chown -R kovri:kovri /home/kovri
+COPY ./scripts/entrypoint.sh /usr/local/bin/
 VOLUME /home/kovri/.kovri
 USER kovri
-ENTRYPOINT [ "sh", "-c", "/bin/kovri --host 0.0.0.0 --socksproxyaddress 0.0.0.0 --port ${KOVRI_PORT}" ]
+ENTRYPOINT [ "sh", "-c", "/usr/local/bin/entrypoint.sh" ]
 EXPOSE 4447
 
 
