@@ -26,6 +26,7 @@ RUN adduser --uid 1000 kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone"
   && chown -R kovri:kovri /home/kovri
 COPY ./scripts/entrypoint.sh /usr/local/bin/
 USER kovri
+VOLUME /home/kovri/.kovri
 ENTRYPOINT [ "sh", "-c", "/usr/local/bin/entrypoint.sh" ]
 EXPOSE 4447
 
