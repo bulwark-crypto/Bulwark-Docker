@@ -12,8 +12,9 @@ RUN apt-get update \
   libssl-dev=1.0.2g-1ubuntu4.13 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
-RUN adduser kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
+RUN adduser --uid 1000 kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
   && mkdir /home/kovri/.kovri \
+  && mkdir /home/kovri/share \
   && tar xzf kovri.tar.gz --strip=1 -C /usr/local/bin/ \
   && tar xzf kovri-conf.tar.gz -C /home/kovri/.kovri/ \
   && echo "[Bulwark]" > /home/kovri/.kovri/config/tunnels.conf \
@@ -24,7 +25,6 @@ RUN adduser kovri --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled
   && echo "keys = bulwarkd.dat" >> /home/kovri/.kovri/config/tunnels.conf \
   && chown -R kovri:kovri /home/kovri
 COPY ./scripts/entrypoint.sh /usr/local/bin/
-VOLUME /home/kovri/.kovri
 USER kovri
 ENTRYPOINT [ "sh", "-c", "/usr/local/bin/entrypoint.sh" ]
 EXPOSE 4447
