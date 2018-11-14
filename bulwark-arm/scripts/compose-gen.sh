@@ -69,11 +69,29 @@ done
 
 clear
 
+cat >> ~/.bashrc << EOL
+
+# Alias shortcuts for Docker masternodes
+
+EOL
+
+for i in "${!NAMES[@]}"; do
+echo "alias ${NAMES[$i]}='docker container exec -it ${NAMES[$i]}'" >> ~/.bashrc 
+done 
+
+source ~/.bashrc
+
 cat << EOL
 
 Setup complete. You can now start your node(s) with: 
 
 cd bulwark-mn
 docker-compose up -d
+
+Alias commands for all your masternodes have been installed. To run a command
+inside your masternode, just call it with its name. For example, if you want 
+to run getinfo inside your masternode "mn1", run this command:
+
+mn1 getinfo
 
 EOL
