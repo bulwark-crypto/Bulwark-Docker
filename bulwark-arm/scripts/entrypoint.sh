@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 if [ ! -f ~/.bulwark/bulwark.conf ]; then
   touch ~/.bulwark/bulwark.conf
